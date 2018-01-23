@@ -4,23 +4,26 @@ import argparse
 import calendar
 
 from datetime import date, datetime
+from itertools import zip_longest
 
 
-def get_days(year, month, day, weeks=14, days=None):
+def _grouper(iterable, n, fillvalue=None):
+    args = [iter(iterable)] * n
+    return zip_longest(*args, fillvalue=fillvalue)
+
+
+def get_days(year, month, day, days, weeks=14):
     """Print some days of the calendar sequentially.
 
     - year: starting year, e.g. 2018
     - month: integer month, e.g. 1 for January
     - day: day of the month, e.g. 20
-    - weeks: Number of weeks we print; default is 14
     - days: A list of days of the week in which we're interested. These should
       be written as the first 3 chars; default is ['Tue', 'Thu']
+    - weeks: Number of weeks we print; default is 14
 
     """
     results = []
-
-    if days is None:
-        days = ['Tue', 'Thu']
 
     c = calendar.Calendar()
     start_date = date(year, month, day)
@@ -46,9 +49,17 @@ def get_days(year, month, day, weeks=14, days=None):
 
 
 def main(args):
-    results = get_days(args.year, args.month, args.day, args.weeks, args.dows)
-    for day in results:
-        print(day[:10])
+    dows = args.dows or ['Tue', 'Thu']
+    results = get_days(args.year, args.month, args.day, dows, weeks=args.weeks)
+    if args.chunk:
+        results = _grouper(results, len(dows))
+        for group in results:
+            for day in group:
+                print(day[:10])
+            print("-" * 10)
+    else:
+        for day in results:
+            print(day[:10])
 
 
 if __name__ == "__main__":
@@ -97,6 +108,14 @@ if __name__ == "__main__":
         type=str,
         nargs='*',
         help='Weekdays we wish to print (e.g. Tue, Thu)'
+    )
+    parser.add_argument(
+        '-c',
+        '--chunk',
+        dest='chunk',
+        action='store_true',
+        default=False,
+        help="Separate output into chunks based on the number of days specified."
     )
     args = parser.parse_args()
     main(args)
