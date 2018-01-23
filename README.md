@@ -12,6 +12,7 @@ Print some days in a list.
                                                               [-m MONTH] [-d DAY]
                                                               [-w WEEKS]
                                                               [-s [Weekday [Weekday ...]]]
+                                                              [-c]
 
     optional arguments:
       -h, --help            show this help message and exit
@@ -23,6 +24,8 @@ Print some days in a list.
                             Number of weeks. Default is 14.
       -s [Weekday [Weekday ...]], --dows [Weekday [Weekday ...]]
                             Weekdays we wish to print (e.g. Tue, Thu)
+      -c, --chunk           Separate output into chunks based on the number of
+                            days specified.
 
 ## Examples
 
@@ -70,6 +73,22 @@ Here, we print 4 weeks of Wednesdays starting on Jan 15, 2018.
     Thu Feb  2
     Tue Feb  7
     Thu Feb  9
+
+Print Fri, Sat, Sun for three weeks, but also group the output in chunks (`-c`).
+
+    $ ./days.py -s Fri Sat Sun -w 3 -c
+    Fri Jan 26
+    Sat Jan 27
+    Sun Jan 28
+    ----------
+    Fri Feb  2
+    Sat Feb  3
+    Sun Feb  4
+    ----------
+    Fri Feb  9
+    Sat Feb 10
+    Sun Feb 11
+    ----------
 
 ## Why?
 
