@@ -5,13 +5,29 @@ Print some days in a list.
 
 A simple command-line tool for generating lists of specific weekdays over a given number of weeks. Perfect for planning class schedules, recurring meetings, or any activity that happens on specific days of the week.
 
+## Quick Start
+
+### Run instantly with uvx (no installation required)
+
+```bash
+# Run directly from GitHub
+uvx --from git+https://github.com/bradmontgomery/days days -n 4
+
+# With options
+uvx --from git+https://github.com/bradmontgomery/days days --start-date 2025-01-15 --on Mon Wed Fri -n 3
+```
+
 ## Installation
 
-### Using uv (recommended)
+### Using uvx (recommended for one-off use)
+
+No installation needed! Just use `uvx --from git+https://github.com/bradmontgomery/days days` followed by your options.
+
+### Using uv (recommended for regular use)
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/days.git
+git clone https://github.com/bradmontgomery/days.git
 cd days
 
 # Install with uv
@@ -25,7 +41,7 @@ uv run days
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/days.git
+git clone https://github.com/bradmontgomery/days.git
 cd days
 
 # Run directly (Python 3.12+)
@@ -59,11 +75,17 @@ options:
 
 ## Examples
 
+**Note:** In all examples below, you can replace `uv run days` with:
+- `uvx --from git+https://github.com/bradmontgomery/days days` (no installation)
+- `python days.py` (if you cloned the repo)
+
 The default is to print Tuesdays and Thursdays for 14 weeks, starting on the current day:
 
 ```bash
 $ uv run days
-# or
+# or with uvx (no installation)
+$ uvx --from git+https://github.com/bradmontgomery/days days
+# or directly
 $ python days.py
 ```
 
@@ -84,6 +106,12 @@ Use `--start-date` for convenience:
 
 ```bash
 $ uv run days --start-date 2025-01-15 -n 4
+# or with uvx
+$ uvx --from git+https://github.com/bradmontgomery/days days --start-date 2025-01-15 -n 4
+```
+
+Output:
+```
 Thu Jan 16
 Tue Jan 21
 Thu Jan 23
@@ -140,6 +168,9 @@ $ uv run days --weekdays Mon Tue Wed Thu Fri -n 2
 
 # Weekend days starting from a specific date
 $ uv run days --start-date 2025-06-01 --on Sat Sun -n 4
+
+# Using uvx for quick one-off commands (no installation needed)
+$ uvx --from git+https://github.com/bradmontgomery/days days --on Tue Thu -n 6 --group
 ```
 
 ## Development
@@ -194,6 +225,7 @@ All pull requests are automatically tested on Python 3.12, 3.13, and 3.14.
 - 🐍 Supports Python 3.12, 3.13, and 3.14
 - ✅ Comprehensive test coverage (35+ tests)
 - 🔄 Managed with modern `uv` package manager
+- ⚡ Run instantly with `uvx` (no installation required)
 - 🚀 CI/CD with GitHub Actions
 
 ## Why?
