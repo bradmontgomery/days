@@ -1,6 +1,12 @@
 days
 ====
 
+[![Python Version](https://img.shields.io/badge/python-3.12%20%7C%203.13%20%7C%203.14-blue)](https://www.python.org)
+[![Project Version](https://img.shields.io/badge/version-0.1.0-green)](https://github.com/bradmontgomery/days)
+[![Tests](https://github.com/bradmontgomery/days/workflows/Tests/badge.svg)](https://github.com/bradmontgomery/days/actions)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.txt)
+[![Last Commit](https://img.shields.io/github/last-commit/bradmontgomery/days)](https://github.com/bradmontgomery/days/commits)
+
 Print some days in a list.
 
 A simple command-line tool for generating lists of specific weekdays over a given number of weeks. Perfect for planning class schedules, recurring meetings, or any activity that happens on specific days of the week.
