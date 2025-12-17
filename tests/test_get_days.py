@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import unittest
-from datetime import date
 from days import get_days
 
 
@@ -44,8 +43,8 @@ class TestGetDays(unittest.TestCase):
         
         # Should get 4 days (2 weekends)
         self.assertEqual(len(results), 4)
-        self.assertTrue('Sat' in results[0])
-        self.assertTrue('Sun' in results[1])
+        self.assertIn('Sat', results[0])
+        self.assertIn('Sun', results[1])
     
     def test_get_days_starts_on_requested_day(self):
         """Test when start date is one of the requested weekdays."""

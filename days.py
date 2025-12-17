@@ -114,7 +114,7 @@ def cli():
         default=None,
         metavar='WEEKDAY',
         type=str,
-        nargs='*',
+        nargs='+',
         help='Weekdays to print (e.g., Tue Thu) (default: Tue Thu)'
     )
     parser.add_argument(
