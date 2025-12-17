@@ -62,8 +62,7 @@ def main(args):
             print(day[:10])
 
 
-if __name__ == "__main__":
-
+def cli():
     now = datetime.now()
 
     parser = argparse.ArgumentParser("Print a list of days over a given number of weeks.")
@@ -119,3 +118,7 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     main(args)
+
+
+if __name__ == "__main__":
+    cli()
