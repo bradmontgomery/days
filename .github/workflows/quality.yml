@@ -1,0 +1,54 @@
+name: Code Quality
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  quality:
+    name: Code Quality Checks
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          allow-prereleases: true
+      
+      - name: Check Python syntax
+        run: python -m py_compile days.py
+      
+      - name: Check test files syntax
+        run: |
+          for test_file in tests/test_*.py; do
+            python -m py_compile "$test_file"
+          done
+      
+      - name: Verify no external dependencies in code
+        run: |
+          # Ensure only stdlib imports are used
+          if grep -r "^import\|^from" days.py tests/*.py | grep -v -E "(argparse|calendar|datetime|itertools|unittest|sys|io|os)" | grep -v "from days import" | grep -v "from unittest.mock import"; then
+            echo "Error: Non-stdlib imports found!"
+            exit 1
+          else
+            echo "✓ Only stdlib imports detected"
+          fi
+      
+      - name: Count tests
+        run: |
+          test_count=$(python -m unittest discover tests -v 2>&1 | grep -E "^test_" | wc -l)
+          echo "Total tests: $test_count"
+          if [ "$test_count" -lt 30 ]; then
+            echo "Warning: Expected at least 30 tests, found $test_count"
+            exit 1
+          fi
