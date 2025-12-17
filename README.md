@@ -11,6 +11,8 @@ Print some days in a list.
 
 A simple command-line tool for generating lists of specific weekdays over a given number of weeks. Perfect for planning class schedules, recurring meetings, or any activity that happens on specific days of the week.
 
+> 🌞 **[View the Beautiful Documentation Website →](https://bradmontgomery.github.io/days/)**
+
 ## Quick Start
 
 ### Run instantly with uvx (no installation required)
