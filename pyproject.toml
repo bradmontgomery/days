@@ -1,0 +1,14 @@
+[project]
+name = "days"
+version = "0.2.0"
+description = "Print some days in a list"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+days = "days:cli"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

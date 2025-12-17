@@ -55,25 +55,32 @@ def main(args):
         results = _grouper(results, len(dows))
         for group in results:
             for day in group:
-                print(day[:10])
+                if day is not None:
+                    print(day[:10])
             print("-" * 10)
     else:
         for day in results:
             print(day[:10])
 
 
-if __name__ == "__main__":
-
+def cli():
     now = datetime.now()
 
     parser = argparse.ArgumentParser("Print a list of days over a given number of weeks.")
+    parser.add_argument(
+        '--start-date',
+        dest='start_date',
+        type=str,
+        default=None,
+        help='Start date in YYYY-MM-DD format (overrides -y, -m, -d if provided)'
+    )
     parser.add_argument(
         '-y',
         '--year',
         dest='year',
         type=int,
         default=now.year,
-        help='Year (default is current year: {})'.format(now.year)
+        help='Starting year (default: {})'.format(now.year)
     )
     parser.add_argument(
         '-m',
@@ -81,41 +88,57 @@ if __name__ == "__main__":
         dest='month',
         type=int,
         default=now.month,
-        help='Month (default is current month: {})'.format(now.month)
+        help='Starting month (default: {})'.format(now.month)
     )
     parser.add_argument(
         '-d',
-        '--day',
+        '--dom',
         dest='day',
         type=int,
         default=now.day,
-        help='Day (default is current day: {})'.format(now.day)
+        help='Day of month to start (default: {})'.format(now.day)
     )
     parser.add_argument(
-        '-w',
-        '--weeks',
+        '-n',
+        '--num-weeks',
         dest='weeks',
         type=int,
         default=14,
-        help='Number of weeks. Default is 14.'
+        help='Number of weeks to print (default: 14)'
     )
     parser.add_argument(
-        '-s',
-        '--dows',
+        '-w',
+        '--weekdays',
+        '--on',
         dest='dows',
         default=None,
-        metavar='Weekday',
+        metavar='WEEKDAY',
         type=str,
-        nargs='*',
-        help='Weekdays we wish to print (e.g. Tue, Thu)'
+        nargs='+',
+        help='Weekdays to print (e.g., Tue Thu) (default: Tue Thu)'
     )
     parser.add_argument(
-        '-c',
-        '--chunk',
+        '-g',
+        '--group',
         dest='chunk',
         action='store_true',
         default=False,
-        help="Separate output into chunks based on the number of days specified."
+        help="Group output by weeks"
     )
     args = parser.parse_args()
+    
+    # Handle --start-date if provided
+    if args.start_date:
+        try:
+            start = datetime.strptime(args.start_date, '%Y-%m-%d')
+            args.year = start.year
+            args.month = start.month
+            args.day = start.day
+        except ValueError:
+            parser.error('--start-date must be in YYYY-MM-DD format')
+    
     main(args)
+
+
+if __name__ == "__main__":
+    cli()

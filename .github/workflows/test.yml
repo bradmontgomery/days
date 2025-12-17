@@ -1,0 +1,42 @@
+name: Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  test:
+    name: Test on Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12", "3.13", "3.14"]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          allow-prereleases: true
+      
+      - name: Display Python version
+        run: python --version
+      
+      - name: Run tests
+        run: python -m unittest discover tests -v
+      
+      - name: Test CLI help
+        run: python days.py -h
+      
+      - name: Test CLI execution
+        run: python days.py -n 2

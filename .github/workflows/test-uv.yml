@@ -1,0 +1,50 @@
+name: Test with uv
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  test-uv:
+    name: Test with uv on Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12", "3.13", "3.14"]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+      
+      - name: Set up Python ${{ matrix.python-version }}
+        run: uv python install ${{ matrix.python-version }}
+      
+      - name: Display Python version
+        run: uv run python --version
+      
+      - name: Sync project
+        run: uv sync
+      
+      - name: Run tests via uv
+        run: uv run python -m unittest discover tests -v
+      
+      - name: Test CLI via uv - help
+        run: uv run days -h
+      
+      - name: Test CLI via uv - execution
+        run: uv run days -n 2
+      
+      - name: Test CLI via uv - with options
+        run: uv run days --start-date 2025-01-15 --weekdays Mon Wed Fri -n 2 --group

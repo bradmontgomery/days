@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>days - Never Miss Your Perfect Days</title>
+    <meta name="description" content="A beautiful command-line tool for generating lists of specific weekdays. Perfect for planning class schedules, recurring meetings, or any activity that happens on specific days of the week.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --secondary: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --code-bg: #1e293b;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></svg>');
+            background-size: 50px 50px;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand-icon {
+            font-size: 120px;
+            line-height: 1;
+            margin-bottom: 20px;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        h1 {
+            font-size: 72px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+
+        .tagline {
+            font-size: 28px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 18px 36px;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 48px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 30px;
+            border-radius: 16px;
+            background: var(--light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .feature h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+
+        .feature p {
+            color: var(--gray);
+            font-size: 16px;
+        }
+
+        /* Quick Start Section */
+        .quick-start {
+            padding: 80px 20px;
+            background: var(--dark);
+            color: white;
+        }
+
+        .install-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .install-box h3 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+            overflow-x: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .code-block pre {
+            margin: 0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .code-comment { color: #6b7280; }
+        .code-command { color: #60a5fa; }
+        .code-flag { color: #a78bfa; }
+        .code-value { color: #34d399; }
+        .code-output { color: #fbbf24; }
+
+        /* Examples Section */
+        .examples {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .example-grid {
+            display: grid;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .example {
+            background: var(--light);
+            border-radius: 16px;
+            padding: 30px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .example h4 {
+            font-size: 20px;
+            margin-bottom: 16px;
+            color: var(--dark);
+        }
+
+        .example-description {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        /* Help Output Section */
+        .help-section {
+            padding: 80px 20px;
+            background: var(--dark);
+            color: white;
+        }
+
+        .help-output {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+
+        .help-usage { color: #fbbf24; }
+        .help-option { color: #60a5fa; }
+        .help-description { color: #9ca3af; }
+
+        /* Footer */
+        .footer {
+            padding: 40px 20px;
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .badges {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .badge {
+            display: inline-block;
+        }
+
+        .footer-links {
+            margin-top: 20px;
+        }
+
+        .footer-links a {
+            color: var(--secondary);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 48px;
+            }
+
+            .tagline {
+                font-size: 20px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .brand-icon {
+                font-size: 80px;
+            }
+        }
+
+        /* Highlight animations */
+        .highlight {
+            background: linear-gradient(120deg, var(--secondary) 0%, var(--secondary) 100%);
+            background-repeat: no-repeat;
+            background-size: 0% 100%;
+            background-position: 0 100%;
+            transition: background-size 0.3s ease;
+            padding: 0 4px;
+        }
+
+        .highlight:hover {
+            background-size: 100% 100%;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin: 60px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="brand-icon">🌞</div>
+            <h1>days</h1>
+            <p class="tagline">Never miss your perfect days</p>
+            <p style="font-size: 20px; max-width: 800px; margin: 0 auto 40px; opacity: 0.9;">
+                A beautifully simple command-line tool for generating lists of specific weekdays.<br>
+                Perfect for class schedules, recurring meetings, or any weekly activities.
+            </p>
+            <div class="cta-buttons">
+                <a href="#quick-start" class="btn btn-primary">
+                    ⚡ Get Started
+                </a>
+                <a href="https://github.com/bradmontgomery/days" class="btn btn-secondary">
+                    📦 View on GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section style="padding: 60px 20px; background: white;">
+        <div class="stats">
+            <div class="stat">
+                <span class="stat-number">0</span>
+                <span class="stat-label">Dependencies</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">35+</span>
+                <span class="stat-label">Tests</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">3</span>
+                <span class="stat-label">Python Versions</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">⚡</span>
+                <span class="stat-label">Fast & Simple</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why You'll Love It</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant Execution</h3>
+                    <p>Run with <code>uvx</code> – no installation required. Try it once or use it forever.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Intuitive Interface</h3>
+                    <p>Clean, modern CLI with flags that make sense. <code>--on Mon Wed Fri</code> – simple as that.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Zero Dependencies</h3>
+                    <p>Pure Python standard library. No external packages, no security risks, no bloat.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Modern Tooling</h3>
+                    <p>Built with <code>uv</code>, tested on Python 3.12-3.14, CI/CD with GitHub Actions.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">✅</div>
+                    <h3>Battle Tested</h3>
+                    <p>35+ comprehensive unit tests ensure reliability. Every feature is verified.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📅</div>
+                    <h3>Flexible Planning</h3>
+                    <p>Any weekdays, any duration, any start date. Group by weeks or list sequentially.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start Section -->
+    <section id="quick-start" class="quick-start">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Quick Start</h2>
+            
+            <div class="install-box">
+                <h3>⚡ Run Instantly (No Installation)</h3>
+                <p style="margin-bottom: 20px; color: #9ca3af;">The fastest way to try it. Just copy and paste:</p>
+                <div class="code-block">
+                    <pre><code><span class="code-command">uvx</span> <span class="code-flag">--from</span> <span class="code-value">git+https://github.com/bradmontgomery/days</span> <span class="code-command">days</span> <span class="code-flag">-n</span> <span class="code-value">4</span></code></pre>
+                </div>
+            </div>
+
+            <div class="install-box">
+                <h3>📦 Install with uv (Recommended)</h3>
+                <p style="margin-bottom: 20px; color: #9ca3af;">For regular use, clone and install:</p>
+                <div class="code-block">
+                    <pre><code><span class="code-comment"># Clone the repository</span>
+<span class="code-command">git clone</span> <span class="code-value">https://github.com/bradmontgomery/days.git</span>
+<span class="code-command">cd</span> days
+
+<span class="code-comment"># Install with uv</span>
+<span class="code-command">uv sync</span>
+
+<span class="code-comment"># Run it</span>
+<span class="code-command">uv run days</span></code></pre>
+                </div>
+            </div>
+
+            <div class="install-box">
+                <h3>🐍 Standard Python</h3>
+                <p style="margin-bottom: 20px; color: #9ca3af;">Works with Python 3.12+, no dependencies:</p>
+                <div class="code-block">
+                    <pre><code><span class="code-command">git clone</span> <span class="code-value">https://github.com/bradmontgomery/days.git</span>
+<span class="code-command">cd</span> days
+<span class="code-command">python days.py</span></code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Examples Section -->
+    <section class="examples">
+        <div class="container">
+            <h2 class="section-title">See It In Action</h2>
+            
+            <div class="example-grid">
+                <div class="example">
+                    <h4>📅 Default Behavior</h4>
+                    <p class="example-description">Print Tuesdays and Thursdays for 14 weeks, starting today</p>
+                    <div class="code-block">
+                        <pre><code><span class="code-command">uv run days</span></code></pre>
+                    </div>
+                    <div class="code-block">
+                        <pre><code><span class="code-output">Tue Jan 23
+Thu Jan 25
+Tue Jan 30
+Thu Feb  1
+Tue Feb  6
+Thu Feb  8
+...</span></code></pre>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h4>📆 Specify a Start Date</h4>
+                    <p class="example-description">Use <code>--start-date</code> for convenience</p>
+                    <div class="code-block">
+                        <pre><code><span class="code-command">uv run days</span> <span class="code-flag">--start-date</span> <span class="code-value">2025-01-15</span> <span class="code-flag">-n</span> <span class="code-value">4</span></code></pre>
+                    </div>
+                    <div class="code-block">
+                        <pre><code><span class="code-output">Thu Jan 16
+Tue Jan 21
+Thu Jan 23
+Tue Jan 28
+Thu Jan 30
+Tue Feb  4
+Thu Feb  6</span></code></pre>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h4>🎯 Choose Specific Weekdays</h4>
+                    <p class="example-description">Print Mondays, Wednesdays, and Fridays for 3 weeks</p>
+                    <div class="code-block">
+                        <pre><code><span class="code-command">uv run days</span> <span class="code-flag">--on</span> <span class="code-value">Mon Wed Fri</span> <span class="code-flag">-n</span> <span class="code-value">3</span></code></pre>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h4>📊 Group Output by Weeks</h4>
+                    <p class="example-description">Print weekends with visual grouping</p>
+                    <div class="code-block">
+                        <pre><code><span class="code-command">uv run days</span> <span class="code-flag">--on</span> <span class="code-value">Fri Sat Sun</span> <span class="code-flag">-n</span> <span class="code-value">3</span> <span class="code-flag">--group</span></code></pre>
+                    </div>
+                    <div class="code-block">
+                        <pre><code><span class="code-output">Fri Jan 26
+Sat Jan 27
+Sun Jan 28
+----------
+Fri Feb  2
+Sat Feb  3
+Sun Feb  4
+----------
+Fri Feb  9
+Sat Feb 10
+Sun Feb 11
+----------</span></code></pre>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h4>💼 All Weekdays</h4>
+                    <p class="example-description">Perfect for work schedules</p>
+                    <div class="code-block">
+                        <pre><code><span class="code-command">uv run days</span> <span class="code-flag">--weekdays</span> <span class="code-value">Mon Tue Wed Thu Fri</span> <span class="code-flag">-n</span> <span class="code-value">2</span></code></pre>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h4>⚡ One-Time Use with uvx</h4>
+                    <p class="example-description">No installation needed – run directly from GitHub</p>
+                    <div class="code-block">
+                        <pre><code><span class="code-command">uvx</span> <span class="code-flag">--from</span> <span class="code-value">git+https://github.com/bradmontgomery/days</span> <span class="code-command">days</span> <span class="code-flag">--on</span> <span class="code-value">Tue Thu</span> <span class="code-flag">-n</span> <span class="code-value">6</span> <span class="code-flag">--group</span></code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Help Output Section -->
+    <section class="help-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Command Reference</h2>
+            <p style="text-align: center; color: #9ca3af; margin-bottom: 20px; font-size: 18px;">
+                Complete list of available options
+            </p>
+            <div class="help-output">
+<span class="help-usage">usage:</span> Print a list of days over a given number of weeks. [-h]
+                                                          [--start-date START_DATE]
+                                                          [-y YEAR] [-m MONTH]
+                                                          [-d DAY] [-n WEEKS]
+                                                          [-w [WEEKDAY ...]]
+                                                          [-g]
+
+<span class="help-usage">options:</span>
+  <span class="help-option">-h, --help</span>            <span class="help-description">show this help message and exit</span>
+  <span class="help-option">--start-date START_DATE</span>
+                        <span class="help-description">Start date in YYYY-MM-DD format (overrides -y, -m, -d
+                        if provided)</span>
+  <span class="help-option">-y, --year YEAR</span>       <span class="help-description">Starting year (default: 2025)</span>
+  <span class="help-option">-m, --month MONTH</span>     <span class="help-description">Starting month (default: 12)</span>
+  <span class="help-option">-d, --dom DAY</span>         <span class="help-description">Day of month to start (default: 17)</span>
+  <span class="help-option">-n, --num-weeks WEEKS</span>
+                        <span class="help-description">Number of weeks to print (default: 14)</span>
+  <span class="help-option">-w, --weekdays, --on [WEEKDAY ...]</span>
+                        <span class="help-description">Weekdays to print (e.g., Tue Thu) (default: Tue Thu)</span>
+  <span class="help-option">-g, --group</span>           <span class="help-description">Group output by weeks</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="badges">
+            <a href="https://www.python.org" class="badge">
+                <img src="https://img.shields.io/badge/python-3.12%20%7C%203.13%20%7C%203.14-blue" alt="Python Version">
+            </a>
+            <a href="https://github.com/bradmontgomery/days" class="badge">
+                <img src="https://img.shields.io/badge/version-0.2.0-green" alt="Version">
+            </a>
+            <a href="https://github.com/bradmontgomery/days/actions" class="badge">
+                <img src="https://github.com/bradmontgomery/days/workflows/Tests/badge.svg" alt="Tests">
+            </a>
+            <a href="../LICENSE.txt" class="badge">
+                <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License">
+            </a>
+        </div>
+        
+        <div class="footer-links">
+            <a href="https://github.com/bradmontgomery/days">GitHub</a>
+            <a href="https://github.com/bradmontgomery/days/issues">Issues</a>
+            <a href="https://github.com/bradmontgomery/days/blob/master/README.md">Documentation</a>
+        </div>
+        
+        <p style="margin-top: 30px; color: #6b7280;">
+            Made with 🌞 by <a href="https://github.com/bradmontgomery" style="color: var(--secondary);">Brad Montgomery</a>
+        </p>
+        <p style="color: #6b7280; font-size: 14px; margin-top: 10px;">
+            © 2018-2025 Brad Montgomery. Released under the MIT License.
+        </p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature, .example').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
