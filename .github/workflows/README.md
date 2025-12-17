@@ -8,8 +8,8 @@ This directory contains CI/CD workflows for the `days` project.
 Runs the test suite on all supported Python versions using standard Python.
 
 **Triggers:**
-- Pull requests to `main` or `master`
-- Pushes to `main` or `master`
+- Pull requests to `main`
+- Pushes to `main`
 
 **Matrix:**
 - Python 3.12, 3.13, 3.14
@@ -25,8 +25,8 @@ Runs the test suite on all supported Python versions using standard Python.
 Runs the test suite using the `uv` package manager to ensure compatibility.
 
 **Triggers:**
-- Pull requests to `main` or `master`
-- Pushes to `main` or `master`
+- Pull requests to `main`
+- Pushes to `main`
 
 **Matrix:**
 - Python 3.12, 3.13, 3.14
@@ -43,8 +43,8 @@ Runs the test suite using the `uv` package manager to ensure compatibility.
 Performs code quality checks and validation.
 
 **Triggers:**
-- Pull requests to `main` or `master`
-- Pushes to `main` or `master`
+- Pull requests to `main`
+- Pushes to `main`
 
 **Checks:**
 - Python syntax validation for main module
