@@ -19,17 +19,18 @@ A simple command-line tool for generating lists of specific weekdays over a give
 
 ```bash
 # Run directly from GitHub
-uvx --from git+https://github.com/bradmontgomery/days days -n 4
+uvx git+https://github.com/bradmontgomery/days -n 4
+
 
 # With options
-uvx --from git+https://github.com/bradmontgomery/days days --start-date 2025-01-15 --on Mon Wed Fri -n 3
+uvx git+https://github.com/bradmontgomery/days --start-date 2025-01-15 --on Mon Wed Fri -n 3
 ```
 
 ## Installation
 
 ### Using uvx (recommended for one-off use)
 
-No installation needed! Just use `uvx --from git+https://github.com/bradmontgomery/days days` followed by your options.
+No installation needed! Just use `uvx git+https://github.com/bradmontgomery/days` followed by your options.
 
 ### Using uv (recommended for regular use)
 
@@ -84,7 +85,7 @@ options:
 ## Examples
 
 **Note:** In all examples below, you can replace `uv run days` with:
-- `uvx --from git+https://github.com/bradmontgomery/days days` (no installation)
+- `uvx git+https://github.com/bradmontgomery/days` (no installation)
 - `python days.py` (if you cloned the repo)
 
 The default is to print Tuesdays and Thursdays for 14 weeks, starting on the current day:
@@ -92,7 +93,7 @@ The default is to print Tuesdays and Thursdays for 14 weeks, starting on the cur
 ```bash
 $ uv run days
 # or with uvx (no installation)
-$ uvx --from git+https://github.com/bradmontgomery/days days
+$ uvx git+https://github.com/bradmontgomery/days
 # or directly
 $ python days.py
 ```
@@ -115,7 +116,7 @@ Use `--start-date` for convenience:
 ```bash
 $ uv run days --start-date 2025-01-15 -n 4
 # or with uvx
-$ uvx --from git+https://github.com/bradmontgomery/days days --start-date 2025-01-15 -n 4
+$ uvx git+https://github.com/bradmontgomery/days --start-date 2025-01-15 -n 4
 ```
 
 Output:
@@ -178,7 +179,7 @@ $ uv run days --weekdays Mon Tue Wed Thu Fri -n 2
 $ uv run days --start-date 2025-06-01 --on Sat Sun -n 4
 
 # Using uvx for quick one-off commands (no installation needed)
-$ uvx --from git+https://github.com/bradmontgomery/days days --on Tue Thu -n 6 --group
+$ uvx git+https://github.com/bradmontgomery/days --on Tue Thu -n 6 --group
 ```
 
 ## Development

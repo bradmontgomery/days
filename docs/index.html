@@ -462,12 +462,12 @@
     <section id="quick-start" class="quick-start">
         <div class="container">
             <h2 class="section-title" style="color: white;">Quick Start</h2>
-            
+
             <div class="install-box">
                 <h3>⚡ Run Instantly (No Installation)</h3>
                 <p style="margin-bottom: 20px; color: #9ca3af;">The fastest way to try it. Just copy and paste:</p>
                 <div class="code-block">
-                    <pre><code><span class="code-command">uvx</span> <span class="code-flag">--from</span> <span class="code-value">git+https://github.com/bradmontgomery/days</span> <span class="code-command">days</span> <span class="code-flag">-n</span> <span class="code-value">4</span></code></pre>
+                    <pre><code><span class="code-command">uvx</span> <span class="code-value">git+https://github.com/bradmontgomery/days</span> <span class="code-flag">-n</span> <span class="code-value">4</span></code></pre>
                 </div>
             </div>
 
@@ -503,7 +503,7 @@
     <section class="examples">
         <div class="container">
             <h2 class="section-title">See It In Action</h2>
-            
+
             <div class="example-grid">
                 <div class="example">
                     <h4>📅 Default Behavior</h4>
@@ -581,7 +581,7 @@ Sun Feb 11
                     <h4>⚡ One-Time Use with uvx</h4>
                     <p class="example-description">No installation needed – run directly from GitHub</p>
                     <div class="code-block">
-                        <pre><code><span class="code-command">uvx</span> <span class="code-flag">--from</span> <span class="code-value">git+https://github.com/bradmontgomery/days</span> <span class="code-command">days</span> <span class="code-flag">--on</span> <span class="code-value">Tue Thu</span> <span class="code-flag">-n</span> <span class="code-value">6</span> <span class="code-flag">--group</span></code></pre>
+                        <pre><code><span class="code-command">uvx</span> <span class="code-value">git+https://github.com/bradmontgomery/days</span> <span class="code-flag">--on</span> <span class="code-value">Tue Thu</span> <span class="code-flag">-n</span> <span class="code-value">6</span> <span class="code-flag">--group</span></code></pre>
                     </div>
                 </div>
             </div>
@@ -597,25 +597,24 @@ Sun Feb 11
             </p>
             <div class="help-output">
 <span class="help-usage">usage:</span> Print a list of days over a given number of weeks. [-h]<br/>
-                                                          [--start-date START_DATE]<br/>
-                                                          [-y YEAR] [-m MONTH]<br/>
-                                                          [-d DAY] [-n WEEKS]<br/>
-                                                          [-w [WEEKDAY ...]]<br/>
-                                                          [-g]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[--start-date START_DATE]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[-y YEAR] [-m MONTH]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[-d DAY] [-n WEEKS]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[-w [WEEKDAY ...]]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;[-g]<br/>
 <br/>
 <span class="help-usage">options:</span><br/>
-  <span class="help-option">-h, --help</span>            <span class="help-description">show this help message and exit</span><br/>
-  <span class="help-option">--start-date START_DATE</span><br/>
-                        <span class="help-description">Start date in YYYY-MM-DD format (overrides -y, -m, -d<br/>
-                        if provided)</span><br/>
-  <span class="help-option">-y, --year YEAR</span>       <span class="help-description">Starting year (default: 2025)</span><br/>
-  <span class="help-option">-m, --month MONTH</span>     <span class="help-description">Starting month (default: 12)</span><br/>
-  <span class="help-option">-d, --dom DAY</span>         <span class="help-description">Day of month to start (default: 17)</span><br/>
-  <span class="help-option">-n, --num-weeks WEEKS</span><br/>
-                        <span class="help-description">Number of weeks to print (default: 14)</span><br/>
-  <span class="help-option">-w, --weekdays, --on [WEEKDAY ...]</span><br/>
-                        <span class="help-description">Weekdays to print (e.g., Tue Thu) (default: Tue Thu)</span><br/>
-  <span class="help-option">-g, --group</span>           <span class="help-description">Group output by weeks</span>
+&nbsp;&nbsp;&nbsp;&nbsp;  <span class="help-option">-h, --help</span>            <span class="help-description">show this help message and exit</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;  <span class="help-option">--start-date START_DATE</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;                        <span class="help-description">Start date in YYYY-MM-DD format (overrides -y, -m, -d if provided)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;  <span class="help-option">-y, --year YEAR</span>       <span class="help-description">Starting year (default: 2025)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;  <span class="help-option">-m, --month MONTH</span>     <span class="help-description">Starting month (default: 12)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;  <span class="help-option">-d, --dom DAY</span>         <span class="help-description">Day of month to start (default: 17)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;  <span class="help-option">-n, --num-weeks WEEKS</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;                        <span class="help-description">Number of weeks to print (default: 14)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;  <span class="help-option">-w, --weekdays, --on [WEEKDAY ...]</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;                        <span class="help-description">Weekdays to print (e.g., Tue Thu) (default: Tue Thu)</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;  <span class="help-option">-g, --group</span>           <span class="help-description">Group output by weeks</span>
             </div>
         </div>
     </section>
@@ -636,13 +635,13 @@ Sun Feb 11
                 <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License">
             </a>
         </div>
-        
+
         <div class="footer-links">
             <a href="https://github.com/bradmontgomery/days">GitHub</a>
             <a href="https://github.com/bradmontgomery/days/issues">Issues</a>
             <a href="https://github.com/bradmontgomery/days/blob/main/README.md">Documentation</a>
         </div>
-        
+
         <p style="margin-top: 30px; color: #6b7280;">
             Made with 🌞 by <a href="https://github.com/bradmontgomery" style="color: var(--secondary);">Brad Montgomery</a>
         </p>
