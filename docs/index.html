@@ -349,11 +349,16 @@
         }
 
         .stats {
-            display: flex;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             gap: 60px;
             margin: 60px 0;
-            flex-wrap: wrap;
+
+            @media (max-width: 768px) {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                margin: 20px 0;
+            }
         }
 
         .stat {
@@ -399,22 +404,24 @@
 
     <!-- Stats -->
     <section style="padding: 60px 20px; background: white;">
-        <div class="stats">
-            <div class="stat">
-                <span class="stat-number">0</span>
-                <span class="stat-label">Dependencies</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">35+</span>
-                <span class="stat-label">Tests</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">3</span>
-                <span class="stat-label">Python Versions</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">⚡</span>
-                <span class="stat-label">Fast & Simple</span>
+        <div class="container">
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-number">0</span>
+                    <span class="stat-label">Dependencies</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">35+</span>
+                    <span class="stat-label">Tests</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">Python Versions</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">⚡</span>
+                    <span class="stat-label">Fast & Simple</span>
+                </div>
             </div>
         </div>
     </section>
